@@ -8,7 +8,14 @@ $result = mysqli_query($con, $sql);
 $row = mysqli_fetch_array($result);
 
 if (count($_POST) > 0) {
-    $sql = "UPDATE employee set userid='" . $_POST['userid'] . "', first_name='" . $_POST['first_name'] . "', last_name='" . $_POST['last_name'] . "', city_name='" . $_POST['city_name'] . "' ,email='" . $_POST['email'] . ",text='" . $_POST['text'] . "' WHERE userid='" . $_POST['userid'] . "'";
+    $id = $_POST['userid'];
+    $firstName = $_POST['first_name'];
+    $lastName = $_POST['last_name'];
+    $city = $_POST['city_name'];
+    $adress = $_POST['email'];
+    $text = $_POST['text'];
+    $sql = "UPDATE employee set userid='$id', first_name='$firstName', last_name='$lastName',
+     city_name='$city' ,email='$adress',text='$text' WHERE userid='$id'";
     mysqli_query($con, $sql);
     header('Location: ../retrieve.php');
 }
@@ -24,13 +31,13 @@ if (count($_POST) > 0) {
     <form name="frmUser" method="post" action="">
         <div><?php echo '<script type="text/javascript">
     console.log("Update data successfully");
-</script> '; 
+</script> ';
                 ?>
         </div>
         <div style="padding-bottom:5px;">
             <a href="../retrieve.php">Employee List</a>
         </div>
-        Username: <br>
+        Client ID: <br>
         <input type="hidden" name="userid" class="txtField" value="<?php echo $row['userid']; ?>">
         <input type="text" name="userid" value="<?php echo $row["userid"]; ?>">
         <br>
@@ -46,9 +53,9 @@ if (count($_POST) > 0) {
         Email:<br>
         <input type="text" name="email" class="txtField" value="<?php echo $row['email']; ?>">
         <br>
-        Email:<br>
-        <input type="text" name="email" class="txtField" value="<?php echo $row['text']; ?>">
-        <input type="submit" name="submit" value="Update" >
+        Info:<br>
+        <input type="text" name="text" class="txtField" value="<?php echo $row['text']; ?>">
+        <input type="submit" name="submit" value="Update">
 
     </form>
 </body>
